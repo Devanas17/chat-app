@@ -1,31 +1,53 @@
-# This is a smart contract for a chat application.
+# Chat application.
 
-It has a Friends struct to store a friend's address and name.
+A decentralized chat application built with Solidity, Hardhat and React.
 
-It has a User struct to store a user's name and friend list.
+## Introduction
 
-It has a Message struct to store a message's sender, timestamp, and content.
+ChatApp is a secure and decentralized chat application that allows users to create their own profiles and interact with their friends. The application stores all data on the Ethereum blockchain, ensuring that all information is secure and cannot be tampered with.
 
-It has an AllUsers struct to store all users' names and account addresses.
+## Getting Started
 
-It has events for when an account is created, a friend is added, and a message is sent.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-It has mappings to store all registered users and their friend lists, and all messages.
+## Prerequisites
 
-Functions:
+- Node.js
+- NPM
+- Hardhat
+- Metamask
 
-checkUserExists: checks if a user exists
+## Installation:
 
-createAccount: creates a new account with a name
+1. Clone the repository
+   `git clone https://github.com/Devanas17/chat-app.git`
 
-getUserName: returns the username of a given address
+2. Navigate to the project directory
+   `cd chat-app`
 
-addFriend: adds a friend to a user's friend list
+3. Install the dependencies
+   `npm install`
 
-getMyFriendList: returns the list of friends of a user
+4. Start the Hardhat network
+   `npx hardhat node`
 
-sendMessage: sends a message to a friend
+5. In a separate terminal, navigate to the project directory and start the React application
 
-\_getChatCode: generates a unique chat code for two users.
+```cd chat-app
+ npm start
+```
 
-\_addFriend: adds a friend to a user's friend list.
+6. Connect to the Hardhat network using Metamask and start using ChatApp.
+
+## Features:
+
+- Create a profile
+- Add friends
+- Chat with friends
+- View chat history
+
+## Built With
+
+- Solidity - The smart contract language
+- Hardhat - The development environment
+- React - The front-end library
