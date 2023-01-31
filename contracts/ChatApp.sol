@@ -24,6 +24,10 @@ contract ChatApp {
         address accountAddress;
     }
 
+    event AccountCreated(address indexed accountAddress, string name);
+    event FriendAdded(address indexed friendAddress, string friendName);
+    event MessageSent(address indexed friendAddress, string message);
+
     AllUsers[] private getAllUsers;
     mapping(address => User) public userLists;
     mapping(bytes32 => Message[]) public allMessages;
@@ -37,6 +41,7 @@ contract ChatApp {
         require(bytes(_name).length > 0, "username cannot be empty");
         userLists[msg.sender].name = _name;
         getAllUsers.push(AllUsers(_name, msg.sender));
+        emit AccountCreated(msg.sender, _name);
     }
 
     // Get Username
@@ -63,6 +68,7 @@ contract ChatApp {
 
         _addFriend(msg.sender, _friend_key, _name);
         _addFriend(_friend_key, msg.sender, userLists[msg.sender].name);
+        emit FriendAdded(_friend_key, _name);
     }
 
     // function
@@ -122,6 +128,7 @@ contract ChatApp {
         bytes32 chatCode = _getChatCode(msg.sender, _friendKey);
         Message memory newMsg = Message(msg.sender, block.timestamp, _message);
         allMessages[chatCode].push(newMsg);
+        emit MessageSent(_friendKey, _message);
     }
 
     // Read Message

@@ -44,6 +44,10 @@ describe("ChatApp", () => {
       let addFriend = await chatApp
         .connect(user1)
         .addFriend(await user2.getAddress(), "Jack");
+      const result = await chatApp.getMyFriendList();
+      const user = await chatApp.userLists(await user2.getAddress());
+      console.log("Result", result.name);
+      console.log("user", user);
     });
 
     it("Should get all the users", async () => {
