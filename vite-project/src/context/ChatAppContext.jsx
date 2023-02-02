@@ -19,7 +19,6 @@ export const AppProvider = ({ children }) => {
   const [error, setError] = useState("");
 
   // Chat User Data;
-
   const [currentUsername, setCurrentUserName] = useState("");
   const [currentUserAddress, setCurrentUserAddress] = useState("");
 
@@ -41,6 +40,7 @@ export const AppProvider = ({ children }) => {
       setUserLists(userLists);
     } catch (error) {
       setError(error);
+      console.log(error)
     }
   };
 
@@ -58,8 +58,6 @@ export const AppProvider = ({ children }) => {
   // Create Account
   const createAccount = async ({ name, address }) => {
     try {
-      // if (name || address)
-      //   return setError("Name and Account Address are not provided");
       const contract = await connectWithContract();
       const create = await contract.createAccount(name, {gasLimit: 5000000});
       setLoading(true);
@@ -74,9 +72,8 @@ export const AppProvider = ({ children }) => {
   // Add Friend
   const addFriend = async ({ name, address }) => {
     try {
-      // if (name || address) return setError("Name and Address are not provided");
       const contract = await connectWithContract();
-      const add = contract.addFriend(address, name, {gasLimit: 5000000});
+      const add = await contract.addFriend(address, name, {gasLimit: 5000000});
       setLoading(true);
       await add.wait();
       setLoading(false);
@@ -88,12 +85,12 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const sendMessage = async ({ message, address }) => {
+  const sendMessage = async ({ address, message}) => {
     try {
-      if (message || address)
-        return setError("Message and Address are not provided");
+      // if (message || address)
+      //   return setError("Message and Address are not provided");
       const contract = await connectWithContract();
-      const send = contract.sendMessage(address, message);
+      const send = await contract.sendMessage(address, message, {gasLimit: 5000000});
       setLoading(true);
       await send.wait();
       setLoading(false);

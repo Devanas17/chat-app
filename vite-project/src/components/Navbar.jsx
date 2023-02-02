@@ -91,7 +91,7 @@ const Navbar = () => {
               <button onClick={() => connectWallet()}>Connect Wallet</button>
             ) : (
               <button
-                className="ml-5 border-2 px-5 py-2 flex flex-col justify-center items-center"
+                className="ml-5 border-2 px-5 py-2 flex flex-col justify-center items-center" onClick={() => setOpenModal(true)}
               >
                 <img src={userName ? MUser : ""} alt="" className="w-8 h-8" />
                 <small>{userName || "Create Account"}</small>
