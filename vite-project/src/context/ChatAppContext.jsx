@@ -58,10 +58,10 @@ export const AppProvider = ({ children }) => {
   // Create Account
   const createAccount = async ({ name, address }) => {
     try {
-      if (name || address)
-        return setError("Name and Account Address are not provided");
+      // if (name || address)
+      //   return setError("Name and Account Address are not provided");
       const contract = await connectWithContract();
-      const create = await contract.createAccount(name);
+      const create = await contract.createAccount(name, {gasLimit: 5000000});
       setLoading(true);
       await create.wait();
       setLoading(false);
@@ -74,9 +74,9 @@ export const AppProvider = ({ children }) => {
   // Add Friend
   const addFriend = async ({ name, address }) => {
     try {
-      if (name || address) return setError("Name and Address are not provided");
+      // if (name || address) return setError("Name and Address are not provided");
       const contract = await connectWithContract();
-      const add = contract.addFriend(address, name);
+      const add = contract.addFriend(address, name, {gasLimit: 5000000});
       setLoading(true);
       await add.wait();
       setLoading(false);
@@ -84,12 +84,13 @@ export const AppProvider = ({ children }) => {
       window.location.reload();
     } catch (error) {
       console.log("Add Friend not working.", error);
+      setError("AddFriend Not Working", error)
     }
   };
 
   const sendMessage = async ({ message, address }) => {
     try {
-      if (name || address)
+      if (message || address)
         return setError("Message and Address are not provided");
       const contract = await connectWithContract();
       const send = contract.sendMessage(address, message);

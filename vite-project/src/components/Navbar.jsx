@@ -8,7 +8,7 @@ import {
   AiOutlineCloseCircle,
   AiOutlineMenu,
 } from "react-icons/ai";
-import Logo from "../assets/react.svg";
+import MUser from "../assets/m-user.png";
 import GroupChat from "../assets/group-chat.svg"
 
 const Navbar = () => {
@@ -19,7 +19,7 @@ const Navbar = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const menuItems = [
-    { name: "All Users", link: "/alluser" },
+    { name: "All Users", link: "/allusers" },
     { name: "Chat", link: "/" },
     { name: "Contact", link: "/" },
     { name: "Settings", link: "/" },
@@ -86,15 +86,14 @@ const Navbar = () => {
           )}
 
           {/* Connect Wallet */}
-          <div className="conect-btn">
-            {currentAccount ? (
+          <div className="conect-btn flex ">
+            {!currentAccount ? (
               <button onClick={() => connectWallet()}>Connect Wallet</button>
             ) : (
               <button
-                onClick={() => setOpenModal(true)}
-                className="ml-5 border-2 px-5 py-2"
+                className="ml-5 border-2 px-5 py-2 flex flex-col justify-center items-center"
               >
-                <img src={userName ? Logo : "H"} alt="" className="" />
+                <img src={userName ? MUser : ""} alt="" className="w-8 h-8" />
                 <small>{userName || "Create Account"}</small>
               </button>
             )}
@@ -119,12 +118,12 @@ const Navbar = () => {
             heading="You can get everything in life you want if you will just help enough other people get what they want."
             subHeading="Kindly select your name"
             image={GroupChat}
-            createAccount={ createAccount}
+            functionName={ createAccount}
             address={currentAccount}
           />
         </div>
       )}
-      {error ? <Error error={error}/> : ""}
+      {/* {error == "" ? "" : <Error error={error}/>} */}
     </div>
   );
 };

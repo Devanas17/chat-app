@@ -24,18 +24,26 @@ export const connectWallet = async () => {
   }
 };
 
-const fetchContract = async (provider) => {
-  new ethers.Contract(contractABI, contractAddress, provider);
-};
+// const fetchContract = async (provider) => {
+//   new ethers.Contract(contractAddress, contractABI,  provider);
+// };
 
 export const connectWithContract = async () => {
   try {
-    const web3modal = new Web3Modal();
-    const connection = await web3modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
+    // const web3modal = new Web3Modal();
+    // const connection = await web3modal.connect();
+    // const provider = new ethers.providers.Web3Provider(connection);
+    // const signer = provider.getSigner();
+    // const contract = fetchContract(signer);
+    // return contract;
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = fetchContract(signer);
-    return contract;
+    const contract = new ethers.Contract(
+      contractAddress,
+      contractABI,
+      signer
+    );
+    return contract
   } catch (error) {
     console.log("Connect With Contract", error);
   }

@@ -1,8 +1,13 @@
 import React from 'react'
 
-const Error = () => {
+const Error = ({error}) => {
+  console.log(error)
   return (
-    <div>Error</div>
+    <div className=''>
+      <div className="e-b">
+        Something Went Wrong 
+      </div>
+    </div>
   )
 }
 
